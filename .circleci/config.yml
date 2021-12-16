@@ -30,7 +30,6 @@ jobs:
   linting:
     docker:
       - image: << pipeline.parameters.docker_image >>
-    
     steps:
       - checkout
       - restore_cache:
@@ -41,7 +40,7 @@ jobs:
       - run:
           name: install dependencies
           command: |
-          
+            cd: ~
             python3 -m venv venv
             . venv/bin/activate
             make install
