@@ -1,12 +1,24 @@
-FROM nginx/unit:1.19.0-python3.7
+FROM python:3.10.0-bullseye
+LABEL maintainer="Everlyne Angwenyi"
 
-# port used by the listener in config.json
-EXPOSE 8080
+## Step 1:
+# Create a working directory
+WORKDIR /app
 
-COPY requirements.txt /config/requirements.txt
-RUN apt update && apt install -y python3-pip    \
-    && pip3 install -r /config/requirements.txt \
-    && rm -rf /var/lib/apt/lists/*
+## Step 2:
+# Copy source code to working directory
+COPY  ./app /tic-tac-toe
 
-COPY config.json /docker-entrypoint.d/config.json
-COPY app.py /www/app.py
+## Step 3:
+# Install packages from requirements.txt
+# hadolint ignore=DL3013
+RUN pip install --upgrade pip &&\
+    pip install --trusted-host pypi.python.org -r requirements.txt
+
+## Step 4:
+#Expose port 80
+EXPOSE 80
+
+## Step 5:
+# Run app.py at container launch
+CMD ["python", "app.py"]
