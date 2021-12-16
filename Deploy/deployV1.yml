@@ -21,7 +21,7 @@ spec:
         app: tic-tac-toe
     spec:
       containers:
-        - image: greentropikal/tic-tac-toe:latest
+        - image: tic-tac-toe:latest
           imagePullPolicy: Always
           name: tic-tac-toe
           ports:
