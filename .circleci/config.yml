@@ -30,7 +30,6 @@ jobs:
   linting:
     docker:
       - image: << pipeline.parameters.docker_image >>
-    
     steps:
       - checkout
       - restore_cache:
@@ -38,6 +37,7 @@ jobs:
             - v1-dependencies-{{ checksum "requirements.txt" }}
             
             - v1-dependencies-
+  
       - run:
           name: install dependencies
           command: |
